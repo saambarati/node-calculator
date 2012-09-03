@@ -22,12 +22,12 @@ When starting calculator, it starts a node repl with all of the following proper
     f(2, 4) // returns 9
 
 #### derive
-params `([string|function], point to evaluate function)'
-    derive('f(x) = x*x', 2) //evaluate derivative @ x = 2;  returns 4
+params `([string|function], point to evaluate function)`
+    `derive('f(x) = x*x', 2) //evaluate derivative @ x = 2;  returns 4`
 
 #### integrate
 params `([string|function], lower limit, upper limit)`
-    derive('f(x) = x*x', 0, 1) //evaluate definite integral from x = 0 to x = 1;  returns .333 = 1/3  
+`derive('f(x) = x*x', 0, 1) //evaluate definite integral from x = 0 to x = 1;  returns .333 = 1/3`
 
 #### accuracy
 Set this property to determine how accurate the definite integral will be. Essentialy the "dx" in f(x)dx.
