@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 
 var calcBrain = require('./integral.js') 
   , repl = require('repl')
@@ -5,11 +6,13 @@ var calcBrain = require('./integral.js')
 calcBrain.roundAccuracy = 1/10
 console.log('listing all properties that are becoming part of the global scope')
 console.log('-----------------------------------------------------------------')
-for (prop in calcBrain) {
+Object.getOwnPropertyNames(calcBrain).forEach(function(prop) {
+  if (prop === 'description') return //shim, but ignore description property
+
   GLOBAL[prop] = calcBrain[prop]
-  console.log('property =>' + prop)
-  console.log('  ' + calcBrain[prop].description)
-}
+  console.log('property => ' + prop)
+  console.log('  ' + calcBrain.description[prop])
+})
 
 repl.start({})
 

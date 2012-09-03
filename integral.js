@@ -69,16 +69,16 @@ function derive(f, x) {
 //console.log(integrate('f(x) = (0-x) * Math.pow(x+3,2)', -3, 0))
 //console.log(derive('f(x) = Math.pow(x, 2) + x', 1))
 
+
 exports.accuracy = 1/1000000
 exports.roundAccuracy = 1/1000
 exports.func = interpretFunc
 exports.derive = derive
 exports.integrate = integrate
 
-exports.accuracy.description = 'how fine of rectangle do you want calculating your integrals. i.e the "dx" part of an integral'
-exports.roundAccuracy.description = 'if an answer is within this distance to a whole number, a whole number is returned'
-exports.func.description = 'accepts a string like "f(x) = x*x" or "f(t) = Math.pow(x, 3)" and returns a function that when passed a parameter will evaluate the function'
-exports.derive.description = 'evaluates a function or string following the "func" guidelines of a string and derives it at a given point, paramters to this function are ([string|function], point)'
-exports.integrate.description = 'evaluates a function or string following the "func" guidelines of a string and integrates it between two points, paramters to this function are ([string|function], lowerLim, upperLim)'
-
-
+exports.description = {}
+exports.description.accuracy = 'how fine of rectangle do you want calculating your integrals. i.e the "dx" part of an integral'
+exports.description.roundAccuracy = 'if an answer is within this distance to a whole number, a whole number is returned'
+exports.description.func = 'accepts a string like "f(x) = x*x" or "f(t) = Math.pow(x, 3)" and returns a function that when passed a parameter will evaluate the function'
+exports.description.derive = 'evaluates a function or string following the "func" guidelines of a string and derives it at a given point, paramters to this function are ([string|function], point)'
+exports.description.integrate = 'evaluates a function or string following the "func" guidelines of a string and integrates it between two points, paramters to this function are ([string|function], lowerLim, upperLim)'

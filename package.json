@@ -1,11 +1,14 @@
 {
   "name": "calculator",
-  "version": "0.0.2",
+  "version": "0.0.7",
   "description": "simple cli calculator",
   "main": "cliCalc.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node cliCalc.js"
+  },
+  "bin" : {
+    "node-calc" : "./cliCalc.js"
   },
   "repository": {
     "type" : "git",
