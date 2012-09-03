@@ -5,6 +5,7 @@ function formulateFunc(str, varname) {
   var s = '(function() { return function('+varname+') { return '+str+'} })()'
   //console.log(s)
   return eval(s) //I know it's 'evil'. This returns a function when 'eval'ed
+  //return new Function()
 }
 
 function interpretFunc(str) {
