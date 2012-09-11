@@ -1,6 +1,6 @@
 {
   "name": "calculator",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "simple cli calculator",
   "main": "cliCalc.js",
   "scripts": {

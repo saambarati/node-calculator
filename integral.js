@@ -20,14 +20,14 @@ function integrate(f, lower, upper) {
   var dx = exports.accuracy
     , sum = 0
     , cur = lower
-    , func 
+    , func
 
   if (typeof f === 'function') {
     func = f
   } else {
     func = interpretFunc(f)
   }
- 
+
   try {
     while (cur < upper) {
       sum += func(cur) * dx
@@ -79,6 +79,6 @@ exports.integrate = integrate
 exports.description = {}
 exports.description.accuracy = 'how fine of rectangle do you want calculating your integrals. i.e the "dx" part of an integral'
 exports.description.roundAccuracy = 'if an answer is within this distance to a whole number, a whole number is returned'
-exports.description.func = 'accepts a string like "f(x) = x*x" or "f(t) = Math.pow(x, 3)" and returns a function that when passed a parameter will evaluate the function'
+exports.description.func = 'accepts a string like "f(x) = x*x" or "f(t) = Math.pow(t, 3)" and returns a function that when passed a parameter will evaluate the function'
 exports.description.derive = 'evaluates a function or string following the "func" guidelines of a string and derives it at a given point, paramters to this function are ([string|function], point)'
 exports.description.integrate = 'evaluates a function or string following the "func" guidelines of a string and integrates it between two points, paramters to this function are ([string|function], lowerLim, upperLim)'
