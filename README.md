@@ -4,7 +4,7 @@
      npm install calculator
      cd calculator
      npm start
- 
+
 or
 
     npm install -g calculator
@@ -13,8 +13,9 @@ or
 ### API
 
 When starting calculator, it starts a node repl with all of the following properties set as properties of the `GLOBAL` object.
+All Math properties are replaced with `Math.(prop)` so you can write `var f = func('f(x) = sin(x)')` instead of `var f = func('f(x) = Math.sin(x)')`
 
-#### func 
+#### func
     var f = func('f(x) = x*10 - 20')
     f(3) //returns 10
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var calcBrain = require('./integral.js') 
+var calcBrain = require('./calculator.js')
   , repl = require('repl')
 
 calcBrain.roundAccuracy = 1/10
