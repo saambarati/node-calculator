@@ -1,6 +1,6 @@
 
 var mathReplacements = Object.getOwnPropertyNames(Math) //i.e cos, sin, atan, etc ...
-  , DEBUG = true
+  , DEBUG = false
   , debug = (DEBUG ? console.log : function(){})
 
 function interpretFunc(str) {

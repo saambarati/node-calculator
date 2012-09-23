@@ -6,9 +6,10 @@ var calcBrain = require('./calculator.js')
   , path = require('path')
   , optimist = require('optimist')
   , prompt = require('prompt')
-  , DEBUG = true
+  , DEBUG = false
   , argv
   , debug
+
 if (DEBUG) {
   debug = function() { console.log.apply(console, ['debug: '.yellow].concat(Array.prototype.slice.call(arguments)) ) }
 } else {
@@ -37,9 +38,6 @@ argv = require('optimist')
 
   .argv
 //end of optimist parse
-
-
-
 
 
 /* functions to deal with global data IO*/
