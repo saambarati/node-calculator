@@ -1,19 +1,35 @@
 
-var mathReplacements = Object.getOwnPropertyNames(Math)
+var mathReplacements = Object.getOwnPropertyNames(Math) //i.e cos, sin, atan, etc ...
+  , DEBUG = true
+  , debug = (DEBUG ? console.log : function(){})
 
 function interpretFunc(str) {
   var sections = /f\(([A-Za-z\s\,]+)\)\s*\=([\s\S]*)/.exec(str) // capture the f({varname}) = {mathematical function with respect to 'varname'}
     , varnames = sections[1]
-    , func = sections[2]
+    , func = ' ' + sections[2] + ' ' //pad with spaces b/c regexes wont work with matching ''
 
+  //debug('varnames:' + varnames)
+  //debug('func:' + func)
   mathReplacements.forEach(function (prop, ix) {
     var idx = func.indexOf(prop)
-      , notAlphaNum = /[^\w]/
+      , notAlphaNum
+      , before
+      , after
+
     if (idx !== -1) {
-      //this is here because don't replace asin with sin
-      if (notAlphaNum.test(func.charAt(idx-1)) && notAlphaNum.test(func.charAt(idx + prop.length))) { //if the match isn't followed by another alphaNum replace it with Math func
+      notAlphaNum = /[^\w]/
+      before = func.charAt(idx-1)
+      after = func.charAt(idx+prop.length)
+      debug('before:' + before)
+      debug('after:' + after)
+
+      //make sure before/after aren't alpha num. Make sure before isn't period.
+      //this is here because we don't 'asin' replaced with 'aMath.sin' and we dont want 'Math.pow' to be replaced with 'Math.Math.pow'
+      if (notAlphaNum.test(before) && before !== '.' && notAlphaNum.test(after)) { //if the match isn't followed by another alphaNum replace it with Math func
         func = func.replace(prop, 'Math.' + prop)
+        debug('replacing with math')
       }
+      debug('compiled function =>'+func)
     }
   })
   //console.log(func)
@@ -23,9 +39,9 @@ function interpretFunc(str) {
 /* return {function} */
 function formulateFunc(str, varname) {
   var s = '(function() { return function('+varname+') { return '+str+'} })()'
-  //console.log(s)
-  return eval(s) //I know it's 'evil'. This returns a function when 'eval'ed
-  //return new Function()
+    , func = eval(s)
+  //console.log(func.toString())
+  return func     //I know it's 'evil'. This returns a function when 'eval'ed
 }
 
 function integrate(f, lower, upper) {
@@ -53,13 +69,17 @@ function integrate(f, lower, upper) {
   return sum
 }
 
+var interval = Math.pow(10, -15) //small ass number
 function derive(f, x) {
   var func
-    , interval = exports.accuracy
     , x2 = x + interval
     , x1 = x - interval
     , slope
 
+  while (x1 === x2) {
+    x1 *= 10
+    x2 *= 10
+  }
   if (typeof f === 'function') {
     func = f
   } else {

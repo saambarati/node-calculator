@@ -1,6 +1,6 @@
 {
   "name": "calculator",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "simple cli calculator",
   "main": "cliCalc.js",
   "scripts": {
@@ -19,6 +19,11 @@
     "calculator",
     "calculus"
   ],
+  "dependencies" : {
+    "optimist":"0.3.x",
+    "prompt":"0.2.x",
+    "colors":"0.6.x"
+  },
   "author": "saam barati <saambarati1@gmail.com>",
   "license": "MIT"
 }
