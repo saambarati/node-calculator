@@ -191,6 +191,7 @@ function launchConsole() {
     var toDisplay = 'var ' + prop + ' = ' + data[prop] + ';'
     console.log(toDisplay.blue)
     context[prop] = context.func(data[prop]) //define the corresponding property as an interpreted function
+    if (!context[prop]) console.error('the following function has an error: ' + prop.yellow + '  its value is => ' + data[prop].red)
   })
   process.stdout.write(opts.prompt) //write one prompt i.e '>' to indicate repl has started
 }

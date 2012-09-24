@@ -4,36 +4,41 @@ var mathReplacements = Object.getOwnPropertyNames(Math) //i.e cos, sin, atan, et
   , debug = (DEBUG ? console.log : function(){})
 
 function interpretFunc(str) {
-  var sections = /f\(([A-Za-z\s\,]+)\)\s*\=([\s\S]*)/.exec(str) // capture the f({varname}) = {mathematical function with respect to 'varname'}
-    , varnames = sections[1]
-    , func = ' ' + sections[2] + ' ' //pad with spaces b/c regexes wont work with matching ''
+  try {
+    var sections = /f\(([A-Za-z\s\,]+)\)\s*\=([\s\S]*)/.exec(str) // capture the f({varname}) = {mathematical function with respect to 'varname'}
+      , varnames = sections[1]
+      , func = ' ' + sections[2] + ' ' //pad with spaces b/c regexes wont work with matching ''
 
-  //debug('varnames:' + varnames)
-  //debug('func:' + func)
-  mathReplacements.forEach(function (prop, ix) {
-    var idx = func.indexOf(prop)
-      , notAlphaNum
-      , before
-      , after
+    //debug('varnames:' + varnames)
+    //debug('func:' + func)
+    mathReplacements.forEach(function (prop, ix) {
+      var idx = func.indexOf(prop)
+        , notAlphaNum
+        , before
+        , after
 
-    if (idx !== -1) {
-      notAlphaNum = /[^\w]/
-      before = func.charAt(idx-1)
-      after = func.charAt(idx+prop.length)
-      debug('before:' + before)
-      debug('after:' + after)
+      if (idx !== -1) {
+        notAlphaNum = /[^\w]/
+        before = func.charAt(idx-1)
+        after = func.charAt(idx+prop.length)
+        debug('before:' + before)
+        debug('after:' + after)
 
-      //make sure before/after aren't alpha num. Make sure before isn't period.
-      //this is here because we don't 'asin' replaced with 'aMath.sin' and we dont want 'Math.pow' to be replaced with 'Math.Math.pow'
-      if (notAlphaNum.test(before) && before !== '.' && notAlphaNum.test(after)) { //if the match isn't followed by another alphaNum replace it with Math func
-        func = func.replace(prop, 'Math.' + prop)
-        debug('replacing with math')
+        //make sure before/after aren't alpha num. Make sure before isn't period.
+        //this is here because we don't 'asin' replaced with 'aMath.sin' and we dont want 'Math.pow' to be replaced with 'Math.Math.pow'
+        if (notAlphaNum.test(before) && before !== '.' && notAlphaNum.test(after)) { //if the match isn't followed by another alphaNum replace it with Math func
+          func = func.replace(prop, 'Math.' + prop)
+          debug('replacing with math')
+        }
+        debug('compiled function =>'+func)
       }
-      debug('compiled function =>'+func)
-    }
-  })
+    })
+
+    return formulateFunc(func, varnames)
+  } catch(e) {
+    return null
+  }
   //console.log(func)
-  return formulateFunc(func, varnames)
 }
 
 /* return {function} */
@@ -55,6 +60,7 @@ function integrate(f, lower, upper) {
   } else {
     func = interpretFunc(f)
   }
+  if (!func) return NaN
 
   try {
     while (cur < upper) {
@@ -85,6 +91,7 @@ function derive(f, x) {
   } else {
     func = interpretFunc(f)
   }
+  if (!func) return NaN
 
   slope = (func(x2) - func(x1)) / (x2-x1)
   if (Math.abs(Math.round(slope) - slope) < exports.accuracy * 10) slope = Math.round(slope)
