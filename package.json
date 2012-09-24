@@ -1,12 +1,11 @@
 {
   "name": "calculator",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "simple cli calculator",
   "main": "calculator.js",
   "scripts": {
     "test": "node ./test.js",
     "start": "node ./cli.js -c",
-    "postuninstall" : "node ./postuninstall.js"
   },
   "bin" : {
     "node-calc" : "./cli.js"
