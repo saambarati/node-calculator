@@ -9,6 +9,7 @@ var calcBrain = require('./calculator.js')
   , DEBUG = false
   , argv
   , debug
+  , FILE_NAME = require('./FILE_NAME')
 
 if (DEBUG) {
   debug = function() { console.log.apply(console, ['debug: '.yellow].concat(Array.prototype.slice.call(arguments)) ) }
@@ -41,7 +42,6 @@ argv = require('optimist')
 
 
 /* functions to deal with global data IO*/
-var FILE_NAME = path.join(__dirname, 'data.json')
 if (!fs.existsSync(FILE_NAME)) save({ "globalFunctions":{} }) //make sure data.json exists
 
 

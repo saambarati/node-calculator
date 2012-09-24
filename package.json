@@ -1,13 +1,12 @@
 {
   "name": "calculator",
-  "version": "0.1.5",
+  "version": "0.1.8",
   "description": "simple cli calculator",
   "main": "calculator.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node cli.js",
-    "postinstall" : "./postinstall.sh",
-    "prepublish": "./build.sh"
+    "test": "node ./test.js",
+    "start": "node cli.js -c",
+    "postuninstall" : "node ./postuninstall.js"
   },
   "bin" : {
     "node-calc" : "./cli.js"
